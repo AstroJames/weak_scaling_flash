@@ -1,16 +1,45 @@
 #!/usr/bin/env python
 
 """
+    #######################################################################################
     Title: Turb.log analysis tool
     Author: James R. Beattie
     First Created: 28 Mar 2022
-
+    #######################################################################################
+    
     A post-processing analysis tool for computing a weak scaling test of the FLASH simulation,
     time-stamped, and split into blocks between file I/O events. The time for file I/O events
     is also recorded.
     
+    #######################################################################################
+    Example command line useage
+    #######################################################################################    
     
-
+    Example command line (1):
+    
+    compute_weak_scaling.py -f FLASH.log -blocks
+    
+    will produce a comma-separated file of each of the runtime block (-blocks) in the FLASH log 
+    file. Each block is defined as an output of the FLASH simulation undergoing a time-integration.
+    Blocks are split by either file I/O events, simulation restarts, or the end of a log file.
+    For each block, a time-stamp is stored, the walltime clock it took in the block, and
+    the amount of compute hours the user used within the block. 
+   
+    Example command line (2):   
+    
+    compute_weak_scaling.py -f FLASH.log -file_writes -d 
+    
+    uses debug mode (many print statements) and a comma-seperated file for each of the file I/O
+    events, storing the statistics of each one
+    
+    #######################################################################################
+    Arguments:
+    #######################################################################################
+    
+    -f              the filename of the .log file from FLASH
+    -d              to set the debug mode on or off
+    -blocks         write a comma-seperated statistics file for each computational block
+    -file_writes    write a comma-seperated statistics dataset for each file I/O event
     
 
 """
